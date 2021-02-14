@@ -269,15 +269,28 @@ screen_get_color:
 ;   Out:  .a       PETSCII/ISO
 ;---------------------------------------------------------------
 screen_get_char:
+	.byte $db
 	tya
 	cmp llen
 	bcc ldapnt1
 	sec
 	sbc llen
+	phx
+	ldx #0
+	inx
+	.repeat 2
+	cmp llen
+	bcc ldapnt0
+	sec
+	sbc llen
+	inx
+	.endrep
+ldapnt0:
 	asl
 	sta VERA_ADDR_L
-	lda pnt+1
-	adc #1 ; C=0
+	txa
+	adc pnt+1 ; C=0
+	plx
 	bne ldapnt3
 ldapnt1:
 	asl
@@ -322,10 +335,22 @@ screen_set_char:
 	bcc stapnt1
 	sec
 	sbc llen
+	phx
+	ldx #0
+	inx
+	.repeat 2
+	cmp llen
+	bcc stapnt0
+	sec
+	sbc llen
+	inx
+	.endrep
+stapnt0:
 	asl
 	sta VERA_ADDR_L
-	lda pnt+1
-	adc #1 ; C=0
+	txa
+	adc pnt+1 ; C=0
+	plx
 	bne stapnt3
 stapnt1:
 	asl

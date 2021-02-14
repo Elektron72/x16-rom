@@ -22,7 +22,7 @@
 white	=$01            ;white char color
 blue	=$06            ;blue screen color
 maxchr=80
-nwrap=2 ;max number of physical lines per logical line
+nwrap=4 ;max number of physical lines per logical line
 
 .export plot   ; set cursor position
 .export scrorg ; return screen size
