@@ -269,7 +269,6 @@ screen_get_color:
 ;   Out:  .a       PETSCII/ISO
 ;---------------------------------------------------------------
 screen_get_char:
-	.byte $db
 	tya
 	cmp llen
 	bcc ldapnt1
